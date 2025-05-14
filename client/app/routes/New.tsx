@@ -1,9 +1,9 @@
 import React from 'react'
 
-function All() {
+function New() {
   return (
     <div>New</div>
   )
 }
 
-export default All
+export default New
