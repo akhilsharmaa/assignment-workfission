@@ -5,6 +5,7 @@ import AllProducts from "../components/All";
 import { getProducts } from "~/utils/getProducts";
 import axios from "axios";
 import type { Product } from "~/model/Product";
+import { searchProduct } from "~/utils/searchProduct";
 
 export default function Home() {
 
@@ -18,6 +19,14 @@ export default function Home() {
     }
     fetch(); 
   }
+
+  const searchAndSetAllProducts = () => { 
+    const fetch = async () => {
+      const result = await searchProduct();   
+      setProducts(result);  
+    }
+    fetch(); 
+  } 
 
   useEffect(() => {
     fetchAndSetAllProducts(); 

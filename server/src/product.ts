@@ -26,6 +26,7 @@ router.post("/new", async (req: Request, res: Response): Promise<void> => {
 });
 
 router.get("/all", async (req: Request, res: Response): Promise<void> => { 
+
     try {
         const product_db = await prisma.product.findMany()
         res.status(StatusCodes.OK).send(product_db);
@@ -34,6 +35,24 @@ router.get("/all", async (req: Request, res: Response): Promise<void> => {
         res.status(StatusCodes.BAD_REQUEST).send("Something Went wrong");
     }
 }); 
+
+router.post("/search", async (req: Request, res: Response): Promise<void> => {
+    const { name } = req.body;
+    
+    try {
+        const product_db = await prisma.product.findMany({
+            where: {
+                name: {
+                    startsWith: name, 
+                },
+            }
+        });
+        res.status(StatusCodes.OK).send(product_db);
+    } catch (e) {
+        console.error(e);
+        res.status(StatusCodes.BAD_REQUEST).send("Something went wrong");
+    }
+});
 
 router.delete("/delete", async (req: Request, res: Response): Promise<void> => { 
     const { id } = req.body;
