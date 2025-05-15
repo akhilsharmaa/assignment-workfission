@@ -4,6 +4,7 @@ import React, {
     type FormEvent } from "react";
 
 import axios from "axios"
+
 interface ProductData {
   productName: string;
   price: string;
@@ -11,8 +12,11 @@ interface ProductData {
   imageUrl?: string;
 }
 
+interface ProductFormProps {
+  fetchAndSetAllProducts: () => void;
+}
 
-const ProductForm: React.FC = () => {
+const ProductForm: React.FC<ProductFormProps> = ({ fetchAndSetAllProducts }) => {
 
   const [formData, setFormData] = useState<ProductData>({
     productName: "",
@@ -43,6 +47,7 @@ const ProductForm: React.FC = () => {
       );  
       if (result.status === 200) {
           alert("Product added successfully."); 
+          fetchAndSetAllProducts(); 
       }else {
           alert("Something went wrong."); 
       }
