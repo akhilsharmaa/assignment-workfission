@@ -24,6 +24,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ fetchAndSetAllProducts }) => 
     description: "",
     imageUrl: "",
   });
+  const [message, setMessage] = useState<string|undefined>(undefined); 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -46,7 +47,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ fetchAndSetAllProducts }) => 
         }
       );  
       if (result.status === 200) {
-          alert("Product added successfully."); 
+          setMessage("Product added successfully."); 
           fetchAndSetAllProducts(); 
       }else {
           alert("Something went wrong."); 
@@ -59,6 +60,23 @@ const ProductForm: React.FC<ProductFormProps> = ({ fetchAndSetAllProducts }) => 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
       <h2 className="text-2xl font-bold mb-6 text-center">Add New Product</h2>
+
+      {message &&  
+        <div className="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg" role="alert" tabindex="-1" aria-labelledby="hs-toast-solid-color-teal-label">
+          <div id="hs-toast-solid-color-teal-label" className="flex p-4">
+            {message}
+            <div className="ms-auto">
+              <button type="button" className="inline-flex shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-hidden focus:opacity-100" aria-label="Close">
+                <span className="sr-only">Close</span>
+                <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      } 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1 font-medium">Product Name</label>
