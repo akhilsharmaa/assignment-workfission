@@ -4,7 +4,7 @@ import type { Product } from '~/model/Product'
 function Card(props: Product) {
   return (
     <a href="#" className="group">
-      <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg" 
+      <img src={props.imageUrl} 
         alt="Person using a pen to cross a task off a productivity paper card." 
         className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"/>
       <h3 className="mt-4 text-sm text-gray-700">{props.name}</h3>
